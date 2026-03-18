@@ -1,23 +1,19 @@
-/**
- * Lazy Prisma client that only connects on first use.
- * Avoids connection errors during Next.js build/static generation.
- */
+import { PrismaClient } from "@/generated/prisma/client";
+import { PrismaPg } from "@prisma/adapter-pg";
 
-let _prisma: any = null;
+const globalForPrisma = globalThis as unknown as {
+  prisma: InstanceType<typeof PrismaClient>;
+};
 
-export function getPrismaClient() {
-  if (!_prisma) {
-    // Dynamic require to avoid importing at module evaluation time
-    const { PrismaClient } = require("@/generated/prisma/client");
-    _prisma = new PrismaClient();
+function createPrismaClient() {
+  const connectionString = process.env.DATABASE_URL;
+  if (!connectionString) {
+    throw new Error("DATABASE_URL environment variable is not set");
   }
-  return _prisma;
+  const adapter = new PrismaPg({ connectionString });
+  return new PrismaClient({ adapter });
 }
 
-/** Proxy that lazily initializes the Prisma client on first property access */
-export const prisma = new Proxy({} as any, {
-  get(_target, prop) {
-    const client = getPrismaClient();
-    return client[prop];
-  },
-});
+export const prisma = globalForPrisma.prisma || createPrismaClient();
+
+if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;

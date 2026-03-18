@@ -108,7 +108,7 @@ export default function Footer() {
     <>
       <CTASection />
 
-      <footer className="bg-dark px-6 pt-16 pb-8">
+      <footer className="bg-[#1A1A2E] px-6 pt-16 pb-8">
         <div className="mx-auto max-w-6xl">
           {/* Main footer grid */}
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">

@@ -3,7 +3,7 @@
 /* Use class-based dark mode (.dark on <html>) instead of media query */
 @variant dark (&:where(.dark, .dark *));
 
-@theme inline {
+@theme {
   --color-primary: #6366F1;
   --color-primary-light: #818CF8;
   --color-accent: #FF6B6B;
@@ -28,15 +28,13 @@ body {
 }
 
 /* ─── Dark Mode ─── */
+/* --color-dark → white so every text-dark/XX opacity class automatically
+   produces readable white text on dark backgrounds. The one component that
+   used bg-dark for a dark background (Footer) now uses a hardcoded value. */
 html.dark {
   --color-bg: #0F0F1A;
-  --color-dark: #E8E8F0;
+  --color-dark: #FFFFFF;
   --color-card: #1A1A2E;
-}
-
-html.dark body {
-  background: #0F0F1A;
-  color: #E8E8F0;
 }
 
 /* ─── Nav link underline animation ─── */

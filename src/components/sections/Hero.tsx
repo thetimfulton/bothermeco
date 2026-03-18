@@ -28,23 +28,23 @@ function PhoneMockup() {
 
   return (
     <div className="animate-float relative mx-auto w-[300px] sm:w-[320px]">
-      {/* Phone shell */}
-      <div className="rounded-[2.5rem] border-[3px] border-dark/10 bg-white p-2 shadow-2xl shadow-dark/10">
+      {/* Phone shell — hardcoded colors so dark mode doesn't affect the phone UI */}
+      <div className="rounded-[2.5rem] border-[3px] border-[#1A1A2E]/10 bg-white p-2 shadow-2xl shadow-[#1A1A2E]/10">
         {/* Notch */}
         <div className="relative rounded-[2rem] bg-gradient-to-b from-[#f5f5f4] to-[#ececea] px-4 pb-5 pt-8">
           {/* Status bar */}
           <div className="absolute top-2 left-0 flex w-full items-center justify-center">
-            <div className="h-[5px] w-20 rounded-full bg-dark/10" />
+            <div className="h-[5px] w-20 rounded-full bg-[#1A1A2E]/10" />
           </div>
 
           {/* Header bar */}
-          <div className="mb-4 flex items-center gap-2 border-b border-dark/5 pb-3">
+          <div className="mb-4 flex items-center gap-2 border-b border-[#1A1A2E]/5 pb-3">
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
               B
             </div>
             <div>
-              <p className="text-xs font-semibold text-dark">BotherMe</p>
-              <p className="text-[10px] text-dark/40">SMS &middot; Active now</p>
+              <p className="text-xs font-semibold text-[#1A1A2E]">BotherMe</p>
+              <p className="text-[10px] text-[#1A1A2E]/40">SMS &middot; Active now</p>
             </div>
           </div>
 
@@ -58,7 +58,7 @@ function PhoneMockup() {
                 <div
                   className={`animate-msg-in max-w-[85%] rounded-2xl px-3.5 py-2 text-[13px] leading-snug ${
                     msg.sender === "bot"
-                      ? "rounded-bl-sm bg-white text-dark shadow-sm"
+                      ? "rounded-bl-sm bg-white text-[#1A1A2E] shadow-sm"
                       : "rounded-br-sm bg-primary text-white"
                   }`}
                 >
@@ -69,17 +69,17 @@ function PhoneMockup() {
             {visibleCount < messages.length && (
               <div className="flex justify-start">
                 <div className="flex gap-1 rounded-2xl bg-white px-4 py-2.5 shadow-sm">
-                  <span className="animate-typing-dot h-1.5 w-1.5 rounded-full bg-dark/30" />
-                  <span className="animate-typing-dot h-1.5 w-1.5 rounded-full bg-dark/30 [animation-delay:0.15s]" />
-                  <span className="animate-typing-dot h-1.5 w-1.5 rounded-full bg-dark/30 [animation-delay:0.3s]" />
+                  <span className="animate-typing-dot h-1.5 w-1.5 rounded-full bg-[#1A1A2E]/30" />
+                  <span className="animate-typing-dot h-1.5 w-1.5 rounded-full bg-[#1A1A2E]/30 [animation-delay:0.15s]" />
+                  <span className="animate-typing-dot h-1.5 w-1.5 rounded-full bg-[#1A1A2E]/30 [animation-delay:0.3s]" />
                 </div>
               </div>
             )}
           </div>
 
           {/* Input bar */}
-          <div className="mt-3 flex items-center gap-2 rounded-full border border-dark/10 bg-white px-4 py-2">
-            <span className="flex-1 text-xs text-dark/30">iMessage</span>
+          <div className="mt-3 flex items-center gap-2 rounded-full border border-[#1A1A2E]/10 bg-white px-4 py-2">
+            <span className="flex-1 text-xs text-[#1A1A2E]/30">iMessage</span>
             <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary">
               <svg
                 className="h-3 w-3 text-white"

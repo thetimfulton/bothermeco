@@ -197,7 +197,7 @@ export default function Footer() {
           {/* Bottom bar */}
           <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/[0.06] pt-8 sm:flex-row">
             <div className="flex gap-6 text-xs text-white/30">
-              <a href="#" className="transition-colors hover:text-white/50">
+              <a href="/privacy" className="transition-colors hover:text-white/50">
                 Privacy Policy
               </a>
               <a href="#" className="transition-colors hover:text-white/50">

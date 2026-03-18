@@ -196,15 +196,15 @@ export default function Footer() {
 
           {/* Bottom bar */}
           <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/[0.06] pt-8 sm:flex-row">
-            <div className="flex gap-6 text-xs text-white/30">
-              <a href="/privacy" className="transition-colors hover:text-white/50">
+            <div className="flex gap-6 text-xs text-white/50">
+              <a href="/privacy" className="underline decoration-white/20 underline-offset-2 transition-colors hover:text-white/80 hover:decoration-white/40">
                 Privacy Policy
               </a>
-              <a href="/terms" className="transition-colors hover:text-white/50">
+              <a href="/terms" className="underline decoration-white/20 underline-offset-2 transition-colors hover:text-white/80 hover:decoration-white/40">
                 Terms of Service
               </a>
             </div>
-            <p className="text-xs text-white/20">
+            <p className="text-xs text-white/35">
               Built with Twilio and spite.
             </p>
           </div>

@@ -78,13 +78,13 @@ function CTASection() {
           </button>
         </div>
 
-        <p className="mt-4 text-sm text-white/40">
+        <p className="mt-4 text-sm text-white/60">
           We&apos;ll text you once to get started. No spam. We&apos;re annoying
           on purpose, not by accident.
         </p>
 
         {/* Trust badges */}
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-sm text-white/50">
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-sm text-white/65">
           <span className="flex items-center gap-1.5">
             <span>🔒</span> No spam ever
           </span>

@@ -1,36 +1,117 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BotherMe.co
+
+**SMS-first micro-habit tracking.** Daily text messages that nag you into being a better person.
+
+> High Function. Mild Chaos.
+
+## Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **Styling**: Tailwind CSS v4
+- **Language**: TypeScript
+- **Fonts**: Inter (body) + Space Grotesk (display) via `next/font`
+- **Deployment**: Vercel
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+
+- npm, yarn, or pnpm
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/your-org/bothermeco.git
+cd bothermeco
+
+# Install dependencies
+npm install
+
+# Copy environment variables
+cp .env.example .env.local
+
+# Start the dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see the site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copy `.env.example` to `.env.local` and fill in the values:
 
-## Learn More
+| Variable | Description |
+|----------|-------------|
+| `TWILIO_ACCOUNT_SID` | Your Twilio Account SID |
+| `TWILIO_AUTH_TOKEN` | Your Twilio Auth Token |
+| `TWILIO_PHONE_NUMBER` | Your Twilio phone number (e.g. +15552684371) |
+| `NEXT_PUBLIC_SITE_URL` | Public site URL (e.g. https://botherme.co) |
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src/
+  app/
+    api/signup/route.ts    # POST endpoint for phone signups
+    globals.css            # Tailwind + custom animations + dark mode
+    layout.tsx             # Root layout with SEO, fonts, structured data
+    not-found.tsx          # Custom 404 page
+    page.tsx               # Home page (assembles all sections)
+  components/
+    AnimatedCounter.tsx    # Scroll-triggered number counter
+    FadeIn.tsx             # Intersection Observer fade-in wrapper
+    Navbar.tsx             # Sticky nav with dark mode toggle
+    sections/
+      Hero.tsx             # Hero with phone mockup + typing animation
+      HowItWorks.tsx       # 3-step explainer
+      ProductGrid.tsx      # Filterable product cards
+      Pricing.tsx          # 3-tier pricing with annual toggle
+      Testimonials.tsx     # Auto-scrolling carousel
+      FAQ.tsx              # Accordion
+      Footer.tsx           # CTA section + footer
+public/
+  sitemap.xml              # Sitemap for search engines
+  robots.txt               # Crawler directives
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Scripts
 
-## Deploy on Vercel
+```bash
+npm run dev      # Start development server
+npm run build    # Production build
+npm run start    # Start production server
+npm run lint     # Run ESLint
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The site is configured for one-click Vercel deployment:
+
+```bash
+# Install Vercel CLI
+npm i -g vercel
+
+# Deploy
+vercel
+```
+
+Or connect the GitHub repo to Vercel for automatic deployments on push.
+
+## Features
+
+- Dark mode (system preference + manual toggle)
+- Scroll-triggered fade-in animations
+- Animated streak counter
+- Phone mockup with simulated text conversation
+- Filterable product grid
+- Monthly/annual pricing toggle
+- Auto-scrolling testimonial carousel
+- Accordion FAQ
+- Full SEO (meta tags, Open Graph, structured data, sitemap)
+- Fully responsive (mobile, tablet, desktop)
+
+## License
+
+Proprietary. All rights reserved.

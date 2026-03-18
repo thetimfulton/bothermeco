@@ -1,26 +1,23 @@
 import { NextResponse } from "next/server";
+import catalog from "@/data/services.json";
+import type { Service } from "@/types/services";
+
+export const dynamic = "force-dynamic";
 
 /**
  * POST /api/signup
  *
- * Accepts a phone number and list of services to subscribe to.
- * Currently a stub — will connect to Twilio in the future.
+ * Web signup endpoint. Accepts a phone number and list of service keywords.
+ * Creates user + starts onboarding for the first service via SMS.
  *
  * Body: { phoneNumber: string, services: string[] }
  */
 
-// E.164 format: +1XXXXXXXXXX or basic US format
 const PHONE_REGEX = /^\+?1?\d{10,15}$/;
 
-// Valid service keywords — derived from the service catalog
-import catalog from "@/data/services.json";
-
-const VALID_KEYWORDS = new Set(
-  catalog.services.map((s) => s.keyword.toLowerCase())
-);
-const VALID_NAMES = new Set(
-  catalog.services.map((s) => s.name.toLowerCase())
-);
+const services = catalog.services as Service[];
+const KEYWORD_MAP = new Map(services.map((s) => [s.keyword.toLowerCase(), s]));
+const NAME_MAP = new Map(services.map((s) => [s.name.toLowerCase(), s]));
 
 interface SignupRequest {
   phoneNumber?: string;
@@ -30,7 +27,7 @@ interface SignupRequest {
 export async function POST(request: Request) {
   try {
     const body: SignupRequest = await request.json();
-    const { phoneNumber, services } = body;
+    const { phoneNumber, services: requestedServices } = body;
 
     // --- Validate phone number ---
     if (!phoneNumber) {
@@ -40,63 +37,78 @@ export async function POST(request: Request) {
       );
     }
 
-    // Strip spaces, dashes, and parens for validation
     const cleaned = phoneNumber.replace(/[\s\-()]/g, "");
-
     if (!PHONE_REGEX.test(cleaned)) {
       return NextResponse.json(
-        {
-          error:
-            "Invalid phone number format. Please provide a valid US phone number.",
-        },
+        { error: "Invalid phone number format. Please provide a valid US phone number." },
         { status: 400 }
       );
     }
 
+    const phone = cleaned.startsWith("+") ? cleaned : `+1${cleaned}`;
+
     // --- Validate services ---
-    if (!services || !Array.isArray(services) || services.length === 0) {
+    if (!requestedServices || !Array.isArray(requestedServices) || requestedServices.length === 0) {
       return NextResponse.json(
         { error: "At least one service is required." },
         { status: 400 }
       );
     }
 
-    const invalidServices = services.filter(
-      (s) => !VALID_KEYWORDS.has(s.toLowerCase()) && !VALID_NAMES.has(s.toLowerCase())
-    );
+    // Resolve service keywords/names to Service objects
+    const resolvedServices: Service[] = [];
+    const invalid: string[] = [];
 
-    if (invalidServices.length > 0) {
+    for (const s of requestedServices) {
+      const lower = s.toLowerCase();
+      const service = KEYWORD_MAP.get(lower) || NAME_MAP.get(lower);
+      if (service) {
+        resolvedServices.push(service);
+      } else {
+        invalid.push(s);
+      }
+    }
+
+    if (invalid.length > 0) {
       return NextResponse.json(
-        {
-          error: `Unknown services: ${invalidServices.join(", ")}`,
-        },
+        { error: `Unknown services: ${invalid.join(", ")}` },
         { status: 400 }
       );
     }
 
-    // --- TODO: Connect to Twilio ---
-    // 1. Send welcome SMS via Twilio
-    // 2. Store signup in database
-    // 3. Initialize streak tracking
-    //
-    // const twilio = require('twilio')(
-    //   process.env.TWILIO_ACCOUNT_SID,
-    //   process.env.TWILIO_AUTH_TOKEN
-    // );
-    //
-    // await twilio.messages.create({
-    //   body: `Welcome to BotherMe! You signed up for: ${services.join(', ')}. Reply HELP for options or STOP to cancel.`,
-    //   from: process.env.TWILIO_PHONE_NUMBER,
-    //   to: cleaned,
-    // });
+    // --- Start onboarding for the first service ---
+    // Lazy import to avoid Prisma connection at build time
+    const { startOnboarding } = await import("@/lib/onboarding");
+    const { sendSms } = await import("@/lib/sms");
+
+    const firstService = resolvedServices[0];
+    const welcomeMessage = await startOnboarding(phone, firstService);
+
+    // Send the first onboarding question via SMS
+    await sendSms(phone, welcomeMessage);
+
+    // If multiple services, let the user know they'll set up the rest after
+    if (resolvedServices.length > 1) {
+      const remaining = resolvedServices
+        .slice(1)
+        .map((s) => `${s.emoji} ${s.name}`)
+        .join(", ");
+      await sendSms(
+        phone,
+        `After setting up ${firstService.name}, we'll get you started on: ${remaining}. One at a time!`
+      );
+    }
 
     return NextResponse.json(
       {
         success: true,
-        message: "Welcome to BotherMe! You'll receive your first text shortly.",
+        message: `Welcome to BotherMe! Check your phone — we've sent you a text to set up ${firstService.name}.`,
         data: {
-          phoneNumber: cleaned,
-          services: services.map((s) => s.toLowerCase()),
+          phoneNumber: phone,
+          services: resolvedServices.map((s) => ({
+            name: s.name,
+            keyword: s.keyword,
+          })),
           subscribedAt: new Date().toISOString(),
         },
       },

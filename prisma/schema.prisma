@@ -1,0 +1,114 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── Enums ───
+
+enum UserStatus {
+  active
+  paused
+  stopped
+}
+
+enum SubscriptionStatus {
+  onboarding
+  active
+  paused
+  cancelled
+}
+
+// ─── Models ───
+
+/// A user identified by their phone number.
+model User {
+  id            String         @id @default(cuid())
+  phone         String         @unique // E.164 format: +15551234567
+  timezone      String         @default("America/New_York")
+  status        UserStatus     @default(active)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  subscriptions Subscription[]
+  replies       Reply[]
+}
+
+/// A user's subscription to a specific BotherMe service.
+model Subscription {
+  id             String             @id @default(cuid())
+  userId         String
+  user           User               @relation(fields: [userId], references: [id])
+  serviceId      Int                // FK to services.json id
+  serviceKeyword String             // denormalized for fast keyword lookup
+  status         SubscriptionStatus @default(onboarding)
+
+  // Onboarding state machine
+  onboardingStep Int                @default(0)
+  setupAnswers   Json?              // { "0": "answer for q0", "1": "answer for q1", ... }
+
+  // Configuration (populated during/after onboarding)
+  preferredTimes Json?              // ["09:00", "18:00"] in user's timezone
+  buddyPhone     String?            // accountability buddy phone (E.164)
+
+  // Tracking
+  lastSentAt     DateTime?
+  lastRepliedAt  DateTime?
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+
+  scheduledTexts ScheduledText[]
+  replies        Reply[]
+  streak         Streak?
+
+  @@unique([userId, serviceId])
+  @@index([userId, status])
+  @@index([serviceKeyword])
+  @@index([status])
+}
+
+/// An outbound text message (sent or scheduled).
+model ScheduledText {
+  id             String       @id @default(cuid())
+  subscriptionId String
+  subscription   Subscription @relation(fields: [subscriptionId], references: [id])
+  scheduledFor   DateTime
+  sentAt         DateTime?
+  content        String       // message body
+  twilioSid      String?      // Twilio message SID after sending
+  status         String       @default("pending") // pending | sent | failed
+  createdAt      DateTime     @default(now())
+
+  @@index([status, scheduledFor])
+  @@index([subscriptionId])
+}
+
+/// An inbound reply from a user.
+model Reply {
+  id             String        @id @default(cuid())
+  userId         String
+  user           User          @relation(fields: [userId], references: [id])
+  subscriptionId String?
+  subscription   Subscription? @relation(fields: [subscriptionId], references: [id])
+  rawBody        String        // exact text from Twilio
+  parsedValue    Json?         // { type: "number", value: 8 } etc.
+  twilioSid      String?
+  createdAt      DateTime      @default(now())
+
+  @@index([userId, createdAt])
+  @@index([subscriptionId])
+}
+
+/// Streak tracking for a subscription.
+model Streak {
+  id             String       @id @default(cuid())
+  subscriptionId String       @unique
+  subscription   Subscription @relation(fields: [subscriptionId], references: [id])
+  currentCount   Int          @default(0)
+  longestCount   Int          @default(0)
+  lastActivityAt DateTime?
+  updatedAt      DateTime     @updatedAt
+}

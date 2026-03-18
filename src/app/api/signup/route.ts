@@ -12,21 +12,15 @@ import { NextResponse } from "next/server";
 // E.164 format: +1XXXXXXXXXX or basic US format
 const PHONE_REGEX = /^\+?1?\d{10,15}$/;
 
-// Valid service slugs
-const VALID_SERVICES = [
-  "pillping",
-  "hydronudge",
-  "friendpoke",
-  "spendalert",
-  "moodpulse",
-  "flosscoach",
-  "gratitudetext",
-  "dadtext",
-  "callmom",
-  "nospendday",
-  "sleeplog",
-  "plantparent",
-];
+// Valid service keywords — derived from the service catalog
+import catalog from "@/data/services.json";
+
+const VALID_KEYWORDS = new Set(
+  catalog.services.map((s) => s.keyword.toLowerCase())
+);
+const VALID_NAMES = new Set(
+  catalog.services.map((s) => s.name.toLowerCase())
+);
 
 interface SignupRequest {
   phoneNumber?: string;
@@ -68,7 +62,7 @@ export async function POST(request: Request) {
     }
 
     const invalidServices = services.filter(
-      (s) => !VALID_SERVICES.includes(s.toLowerCase())
+      (s) => !VALID_KEYWORDS.has(s.toLowerCase()) && !VALID_NAMES.has(s.toLowerCase())
     );
 
     if (invalidServices.length > 0) {

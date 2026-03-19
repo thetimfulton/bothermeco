@@ -165,7 +165,7 @@ export default function CareersPage() {
                   </div>
                   <p className="mt-3 text-sm text-dark/60">{role.description}</p>
                   <a
-                    href="mailto:careers@botherme.co"
+                    href="mailto:hello@botherme.co?subject=BotherMe%20job%20application"
                     className="mt-4 inline-block text-sm font-semibold text-primary hover:underline"
                   >
                     Apply &rarr;
@@ -184,10 +184,10 @@ export default function CareersPage() {
               We&apos;re always looking for talented, slightly unhinged people.
               Send us a note at{" "}
               <a
-                href="mailto:careers@botherme.co"
+                href="mailto:hello@botherme.co?subject=BotherMe%20job%20application"
                 className="font-medium text-primary underline decoration-primary/30 underline-offset-2 hover:decoration-primary/60"
               >
-                careers@botherme.co
+                hello@botherme.co
               </a>{" "}
               and tell us why you&apos;d be a great addition to the team that
               professionally nags strangers.

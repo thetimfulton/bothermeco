@@ -242,7 +242,7 @@ export default function Pricing() {
           <span className="text-dark/45">
             We&apos;re serious.{" "}
             <a
-              href="mailto:enterprise@botherme.co"
+              href="mailto:hello@botherme.co?subject=BotherMe%20enterprise%20inquiry"
               className="font-medium text-primary underline decoration-primary/30 underline-offset-2 hover:decoration-primary/60"
             >
               Email us

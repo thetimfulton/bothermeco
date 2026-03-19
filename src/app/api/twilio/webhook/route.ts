@@ -161,12 +161,12 @@ async function handleReservedKeyword(
 
     case "HELP":
       return twimlResponse(
-        "BotherMe Help:\n\n• Text a keyword (e.g., WATER) to subscribe\n• MENU — See all services\n• STATUS — Your active subscriptions\n• PAUSE — Pause all texts\n• RESUME — Resume texts\n• CANCEL [SERVICE] — Cancel one service\n• STOP — Unsubscribe from everything\n• BILLING — Manage your subscription\n\nQuestions? Email help@botherme.co"
+        "BotherMe Help:\n\n• Text a keyword (e.g., WATER) to subscribe\n• MENU — See all services\n• STATUS — Your active subscriptions\n• PAUSE — Pause all texts\n• RESUME — Resume texts\n• CANCEL [SERVICE] — Cancel one service\n• STOP — Unsubscribe from everything\n• BILLING — Manage your subscription\n\nQuestions? Email hello@botherme.co"
       );
 
     case "BILLING":
       return twimlResponse(
-        "Manage your billing at: https://botherme.co/billing\n\nOr email billing@botherme.co for help."
+        "Manage your billing at: https://botherme.co/billing\n\nOr email hello@botherme.co for help."
       );
   }
 }

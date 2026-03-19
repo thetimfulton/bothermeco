@@ -314,10 +314,10 @@ export default function TermsOfService() {
             <p className="mt-3">
               You may opt out of this arbitration clause by emailing{" "}
               <a
-                href="mailto:legal@botherme.co"
+                href="mailto:hello@botherme.co?subject=BotherMe%20legal%20inquiry"
                 className="font-medium text-primary underline decoration-primary/30 underline-offset-2 hover:decoration-primary/60"
               >
-                legal@botherme.co
+                hello@botherme.co
               </a>{" "}
               within 30 days of creating your account.
             </p>
@@ -359,10 +359,10 @@ export default function TermsOfService() {
               <li>
                 Email:{" "}
                 <a
-                  href="mailto:legal@botherme.co"
+                  href="mailto:hello@botherme.co?subject=BotherMe%20legal%20inquiry"
                   className="font-medium text-primary underline decoration-primary/30 underline-offset-2 hover:decoration-primary/60"
                 >
-                  legal@botherme.co
+                  hello@botherme.co
                 </a>
               </li>
               <li>

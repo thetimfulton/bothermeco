@@ -31,10 +31,10 @@ export default function PrivacyPolicy() {
               We take your privacy seriously. We make money from subscriptions,
               not surveillance. If you have questions, email us at{" "}
               <a
-                href="mailto:privacy@botherme.co"
+                href="mailto:hello@botherme.co?subject=BotherMe%20privacy%20inquiry"
                 className="font-medium text-primary underline decoration-primary/30 underline-offset-2 hover:decoration-primary/60"
               >
-                privacy@botherme.co
+                hello@botherme.co
               </a>
               .
             </p>
@@ -277,10 +277,10 @@ export default function PrivacyPolicy() {
                 <strong>Delete your data</strong> &mdash; Text STOP to cancel
                 all services. Email{" "}
                 <a
-                  href="mailto:privacy@botherme.co"
+                  href="mailto:hello@botherme.co?subject=BotherMe%20privacy%20inquiry"
                   className="font-medium text-primary underline decoration-primary/30 underline-offset-2 hover:decoration-primary/60"
                 >
-                  privacy@botherme.co
+                  hello@botherme.co
                 </a>{" "}
                 to request complete data deletion.
               </li>
@@ -359,10 +359,10 @@ export default function PrivacyPolicy() {
               <li>
                 Email:{" "}
                 <a
-                  href="mailto:privacy@botherme.co"
+                  href="mailto:hello@botherme.co?subject=BotherMe%20privacy%20inquiry"
                   className="font-medium text-primary underline decoration-primary/30 underline-offset-2 hover:decoration-primary/60"
                 >
-                  privacy@botherme.co
+                  hello@botherme.co
                 </a>
               </li>
               <li>

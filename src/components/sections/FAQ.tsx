@@ -150,10 +150,10 @@ export default function FAQ() {
             </a>{" "}
             (obviously) or email{" "}
             <a
-              href="mailto:help@botherme.co"
+              href="mailto:hello@botherme.co?subject=BotherMe%20support%20request"
               className="font-medium text-primary underline decoration-primary/30 underline-offset-2 hover:decoration-primary/60"
             >
-              help@botherme.co
+              hello@botherme.co
             </a>
           </p>
         </div>

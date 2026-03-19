@@ -376,7 +376,7 @@ export default function TermsOfService() {
               </li>
               <li>
                 Text HELP to{" "}
-                <span className="font-semibold">(555) 268-4371</span>
+                <span className="font-semibold">(855) 812-6669</span>
               </li>
             </ul>
           </section>

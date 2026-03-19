@@ -46,7 +46,7 @@ Copy `.env.example` to `.env.local` and fill in the values:
 |----------|-------------|
 | `TWILIO_ACCOUNT_SID` | Your Twilio Account SID |
 | `TWILIO_AUTH_TOKEN` | Your Twilio Auth Token |
-| `TWILIO_PHONE_NUMBER` | Your Twilio phone number (e.g. +15552684371) |
+| `TWILIO_PHONE_NUMBER` | Your Twilio phone number (e.g. +18558126669) |
 | `NEXT_PUBLIC_SITE_URL` | Public site URL (e.g. https://botherme.co) |
 
 ## Project Structure

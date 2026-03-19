@@ -22,7 +22,7 @@ export default function NotFound() {
           START
         </span>{" "}
         to{" "}
-        <span className="font-semibold text-dark">(555) 268-4371</span> and
+        <span className="font-semibold text-dark">(855) 812-6669</span> and
         let us bother you about it.
       </p>
 

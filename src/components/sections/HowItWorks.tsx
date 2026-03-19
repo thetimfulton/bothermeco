@@ -18,7 +18,7 @@ const STEPS = [
     ),
     title: "Text us a keyword",
     description:
-      'Text WATER, PILLS, FLOSS, or any of our 50 services to (555) 268-4371. That\u2019s it. That\u2019s the signup.',
+      'Text WATER, PILLS, FLOSS, or any of our 50 services to (855) 812-6669. That\u2019s it. That\u2019s the signup.',
     detail: "Takes 11 seconds. We timed it.",
   },
   {

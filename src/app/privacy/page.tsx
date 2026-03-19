@@ -367,7 +367,7 @@ export default function PrivacyPolicy() {
               </li>
               <li>
                 Text: Send HELP to{" "}
-                <span className="font-semibold">(555) 268-4371</span>
+                <span className="font-semibold">(855) 812-6669</span>
               </li>
               <li>
                 Mail: BotherMe.co, Attn: Privacy, [Address to be added]

@@ -138,7 +138,7 @@ export default function Footer() {
                   { label: "Services", href: "#services" },
                   { label: "Pricing", href: "#pricing" },
                   { label: "FAQ", href: "#faq" },
-                  { label: "Blog", href: "#" },
+                  { label: "Blog", href: "/blog" },
                 ].map((link) => (
                   <li key={link.label}>
                     <a
@@ -151,7 +151,7 @@ export default function Footer() {
                 ))}
                 <li>
                   <a
-                    href="#"
+                    href="/careers"
                     className="group text-sm text-white/50 transition-colors hover:text-white"
                   >
                     Careers{" "}

@@ -151,7 +151,7 @@ export default function Hero() {
                 Start Getting Bothered &mdash; $3/mo
               </a>
               <a
-                href="#products"
+                href="#services"
                 className="group inline-flex items-center gap-1.5 text-base font-semibold text-dark/60 transition-colors hover:text-primary"
               >
                 See all 50 ways we&apos;ll annoy you

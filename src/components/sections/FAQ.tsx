@@ -143,7 +143,7 @@ export default function FAQ() {
           <p className="text-sm text-dark/40">
             Still have questions?{" "}
             <a
-              href="mailto:help@botherme.co"
+              href="sms:+18558126669"
               className="font-medium text-primary underline decoration-primary/30 underline-offset-2 hover:decoration-primary/60"
             >
               Text us

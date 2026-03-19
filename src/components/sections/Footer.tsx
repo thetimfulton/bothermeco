@@ -53,7 +53,7 @@ function CTASection() {
             START
           </span>{" "}
           to{" "}
-          <span className="font-semibold text-white">(855) 812-6669</span> or
+          <span className="font-semibold text-white">(855) 812-6669</span>{" "}or
           drop your number below and we&apos;ll text YOU first. (See? We&apos;re
           already being pushy.)
         </p>
